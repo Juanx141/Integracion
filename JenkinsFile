@@ -14,7 +14,7 @@ pipeline {
         stage('Construir Contenedores') {
             steps {
                 script {
-                    sh 'docker-compose -H tcp://host.docker.internal:2375 build'
+                    sh 'docker compose -H tcp://host.docker.internal:2375 build'
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
         stage('Ejecutar Pruebas') {
             steps {
                 script {
-                    sh 'docker-compose -H tcp://host.docker.internal:2375 up --abort-on-container-exit'
+                    sh 'docker compose -H tcp://host.docker.internal:2375 up --abort-on-container-exit'
                 }
             }
         }
