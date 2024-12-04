@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Instalar el conector de MySQL para Python
-RUN pip install mysql-connector-python
+RUN pip install --upgrade pip && pip install --no-cache-dir mysql-connector-python
 
 # Comando para ejecutar el script de Python
 CMD ["python", "conexion.py"]
