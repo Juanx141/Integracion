@@ -1,0 +1,16 @@
+language: minimal
+
+services:
+  - docker
+
+before_install:
+ #Configuramos docker
+  - docker --version
+  - docker-compose --version
+
+script:
+  # Construir y ejecutar los contenedores
+  - docker-compose build
+  - docker-compose up -d
+  # Ejecutar pruebas
+  - docker-compose exec python-app python conexion.py
