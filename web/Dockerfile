@@ -4,19 +4,23 @@ FROM python:3.8-slim
 WORKDIR /app
 
 
+RUN echo 'APT::Update::Post-Invoke-Success {"exit 0;";};' > /etc/apt/apt.conf.d/99disable-post-invoke && \
+    echo 'DPkg::Post-Invoke {"exit 0;";};' >> /etc/apt/apt.conf.d/99disable-post-invoke
+
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     gcc \
     libffi-dev \
     libssl-dev \
-    && apt-get clean
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 
 COPY requirements.txt .
-
-
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 
