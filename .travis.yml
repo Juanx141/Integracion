@@ -1,16 +1,33 @@
-language: minimal
+# Especifica el lenguaje y la distribución
+language: python
+python:
+  - "3.8"
 
+# Servicios necesarios
 services:
   - docker
 
+# Variables de entorno para Travis CI
+env:
+  global:
+    - COMPOSE_DOCKER_CLI_BUILD=1
+    - DOCKER_BUILDKIT=1
+
+# Antes de instalar dependencias
 before_install:
- #Configuramos docker
+  # Instalar herramientas básicas necesarias para Docker y redes
+  - sudo apt-get update
+  - sudo apt-get install -y curl build-essential
+
+# Comandos a ejecutar durante el script
+script:
+  # Verificar versiones de Docker y Docker Compose
   - docker --version
   - docker-compose --version
-
-script:
+  
   # Construir y ejecutar los contenedores
   - docker-compose build
   - docker-compose up -d
-  # Ejecutar pruebas
+  
+  # Ejecutar el script de prueba
   - docker-compose exec python-app python conexion.py
