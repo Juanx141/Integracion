@@ -29,7 +29,7 @@ pipeline {
 
         stage('Desplegar') {
             steps {
-                echo 'Despliegue exitosoOWo'
+                echo 'Despliegue exitoso'
             }
         }
     }

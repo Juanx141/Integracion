@@ -18,6 +18,8 @@ before_install:
   # Instalar herramientas básicas necesarias para Docker y redes
   - sudo apt-get update
   - sudo apt-get install -y curl build-essential
+  - sudo apt-get install python3.8
+
 
 # Comandos a ejecutar durante el script
 script:
